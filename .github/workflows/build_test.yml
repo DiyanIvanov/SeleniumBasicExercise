@@ -1,0 +1,31 @@
+name: build and test the app
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout project repository
+      uses: actions/checkout@v4
+    - name: Setup .NET core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Run Project 1 Tests
+      run: dotnet test TestProject1/TestProject1.csproj --verbosity normal
+    - name: Run Project 2 Tests
+      run: dotnet test TestProject2/TestProject2.csproj --verbosity normal
+    - name: Run Project 3 Tests
+      run: dotnet test TestProject3/TestProject3.csproj --verbosity normal
+      
