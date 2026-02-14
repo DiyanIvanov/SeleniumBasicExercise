@@ -11,7 +11,7 @@ pipeline{
                 bat 'dotnet build --no-restore'
             }
         }
-        parrallel{
+        parallel{
             stage("Test App 1"){
                 steps{
                     bat 'dotnet test TestProject1/TestProject1.csproj --no-build --verbosity normal'
